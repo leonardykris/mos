@@ -26,9 +26,10 @@ class Vote < ActiveRecord::Base
 
     # Hot Score is a function defined inside:
     # db/migrate/20150405200823_add_hot_score_function.rb
-
+    puts ">>>>>>>>>>>>>> HEYYYYYY"
+    puts Time.now
     rank = item.class.where(id: item.id)
-             .select("id, hot_score(#{count}, 0, created_at) as hot_score")
+             .select("id, hot_score(#{count}, 0, #{Time.now}) as hot_score")
              .first.hot_score.to_i
 
     item.update(
